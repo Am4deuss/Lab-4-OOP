@@ -5,10 +5,23 @@ public class Garage<T extends Car> {
     private int maxVehicles;
     private Class<?>[] vehicleTypes;
 
-    public Garage(int maxVehicles, Class<? extends T>... carModels){
+    private double x;
+    private double y;
+
+    public Garage(int maxVehicles, double x, double y, Class<? extends T>... carModels){
+        this.x = x;
+        this.y = y;
         vehiclesStored = new ArrayList<>();
         this.maxVehicles = maxVehicles;
         vehicleTypes = carModels;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public ArrayList<T> getVehiclesStored() {

@@ -175,7 +175,7 @@ class CarTest {
     @Test
     void testGarageAdd() {
         Volvo240 kingenbil = new Volvo240();
-        Garage sunkgarage = new Garage(4, Volvo240.class);
+        Garage sunkgarage = new Garage(4, 0, 0, Volvo240.class);
         sunkgarage.addVehicle(kingenbil);
         assertEquals(kingenbil, sunkgarage.getVehiclesStored().get(0));
     }

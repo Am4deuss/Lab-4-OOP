@@ -18,7 +18,7 @@ public class DrawPanel extends JPanel{
     HashMap<Car, Point> carAndPoint = new HashMap<>();
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    Point volvoWorkshopPoint = new Point(0,300);
 
     public void addToCarAndPoint(Car vehicle, Point point) {
         carAndPoint.put(vehicle, point);

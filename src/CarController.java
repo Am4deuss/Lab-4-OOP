@@ -24,6 +24,9 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
+    // Creating a new Volvo workshop
+    Garage<Volvo240>  volvoGarage = new Garage<>(5, 0, 300, Volvo240.class);
+
     //methods:
 
     public static void main(String[] args) {
@@ -49,10 +52,6 @@ public class CarController {
             currentY += 100;
         }
 
-
-
-
-
         // Start the timer
         cc.timer.start();
     }
@@ -73,6 +72,10 @@ public class CarController {
                     car.turnLeft();
                     car.turnLeft();
                     //car.startEngine();
+                } else if (car instanceof Volvo240 && x == volvoGarage.getX() && y == volvoGarage.getY()){
+                    // Lazy way of checking if the car is being loaded
+                    System.out.println(car);
+                    volvoGarage.addVehicle((Volvo240) car);
                 }
 
                 frame.drawPanel.moveit(car, x, y);
