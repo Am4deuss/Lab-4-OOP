@@ -34,10 +34,13 @@ public class Garage<T extends Car> {
 
     public void addVehicle(T vehicle) {
         // check if instance of the right type with accepted Vehicle()
-        if(isAccepted(vehicle)) {
-            vehiclesStored.add(vehicle);
-        } else {
-            throw new IllegalArgumentException("Wrong car type :P");
+        if(!vehiclesStored.contains(vehicle)) {
+            if (isAccepted(vehicle)) {
+                vehiclesStored.add(vehicle);
+            } else {
+                System.out.println(vehicle.getCarModel());
+                throw new IllegalArgumentException("Wrong car type :P");
+            }
         }
     }
 
