@@ -85,6 +85,7 @@ public class CarController {
                             System.out.println("Successfully loaded VOLVO <3");
                         }
                         volvoGarage.addVehicle((Volvo240) car);
+                        car.stopEngine();
 
                     }
                 }
