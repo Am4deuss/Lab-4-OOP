@@ -1,7 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /*
@@ -10,28 +7,18 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarModel {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
-    // Creating a new Volvo workshop
-    Garage<Volvo240>  volvoGarage = new Garage<>(5, 0, 300, Volvo240.class);
-
-    //methods:
-
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        CarModel cc = new CarModel();
 
         ArrayList<Car> allVehicles = new ArrayList<>();
         Volvo240 volvo = new Volvo240();
@@ -54,45 +41,7 @@ public class CarController {
 
         // Start the timer
         cc.timer.start();
-    }
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-
-                // About to hit a wall?  => stop + switch direction + starta motor
-                if ((x < 0 || x > 800) || (y < 0 || y > 800)) {
-                    //car.stopEngine();
-                    car.turnLeft();
-                    car.turnLeft();
-                    //car.startEngine();
-                }
-
-                frame.drawPanel.moveit(car, x, y);
-
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-
-                if (car instanceof Volvo240){
-                    if(Math.abs(car.getY() - volvoGarage.getY()) <= 50){
-                        if(!volvoGarage.getVehiclesStored().contains(car)) {
-                            System.out.println("Successfully loaded VOLVO <3");
-                        }
-                        volvoGarage.addVehicle((Volvo240) car);
-                        car.stopEngine();
-
-                    }
-                }
-
-            }
-        }
-    }
+    }*/
 
     // Calls the gas method for each car once
     void gas(int amount) {

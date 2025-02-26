@@ -13,12 +13,14 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class Controller extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
     // The controller member
-    CarController carC;
+    CarModel carM;
+
+    private Timer timer;
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
@@ -40,22 +42,25 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
+    public Controller(String framename){
+        this.carM = new CarModel();
         initComponents(framename);
+
+        final int delay = 50;
+        this.timer = new Timer(delay, new TimerListener());
+
+        // Starts the timer which makes the game playable (updatable frames)
+        this.timer.start();
     }
 
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title) {
+    private void initComponents(String framename) {
 
-        this.setTitle(title);
+        this.setTitle(framename);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -99,48 +104,47 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
+        // ActionListeners for handling user inputs
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carM.gas(gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.brake(gasAmount); }
+            public void actionPerformed(ActionEvent e) { carM.brake(gasAmount); }
         });
 
         turboOnButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.turboOn(); }
+            public void actionPerformed(ActionEvent e) { carM.turboOn(); }
         });
 
         turboOffButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.turboOff(); }
+            public void actionPerformed(ActionEvent e) { carM.turboOff(); }
         });
 
         liftBedButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.liftBed(); }
+            public void actionPerformed(ActionEvent e) { carM.liftBed(); }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.lowerBed(); }
+            public void actionPerformed(ActionEvent e) { carM.lowerBed(); }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.stop(); }
+            public void actionPerformed(ActionEvent e) { carM.stop(); }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.start(); }
+            public void actionPerformed(ActionEvent e) { carM.start(); }
         });
 
         // Make the frame pack all it's components by respecting the sizes if possible.
