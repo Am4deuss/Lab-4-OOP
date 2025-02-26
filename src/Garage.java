@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Garage<T extends Car> {
+public class Garage<T extends Vehicle> {
     private ArrayList<T> vehiclesStored;
     private int maxVehicles;
     private Class<?>[] vehicleTypes;
@@ -8,12 +8,12 @@ public class Garage<T extends Car> {
     private double x;
     private double y;
 
-    public Garage(int maxVehicles, double x, double y, Class<? extends T>... carModels){
+    public Garage(int maxVehicles, double x, double y, Class<? extends T>... vehicleModels){
         this.x = x;
         this.y = y;
         vehiclesStored = new ArrayList<>();
         this.maxVehicles = maxVehicles;
-        vehicleTypes = carModels;
+        vehicleTypes = vehicleModels;
     }
 
     public double getX() {
@@ -38,19 +38,19 @@ public class Garage<T extends Car> {
             if (isAccepted(vehicle)) {
                 vehiclesStored.add(vehicle);
             } else {
-                System.out.println(vehicle.getCarModel());
-                throw new IllegalArgumentException("Wrong car type :P");
+                System.out.println(vehicle.getvehicleModel());
+                throw new IllegalArgumentException("Wrong vehicle type :P");
             }
         }
     }
 
-    public Car removeVehicle(int vehicleIndex) {
-       Car removedCar = null;
+    public Vehicle removeVehicle(int vehicleIndex) {
+       Vehicle removedVehicle = null;
        if(vehicleIndex != 0 && vehicleIndex < vehiclesStored.size()) {
-           removedCar = vehiclesStored.get(vehicleIndex);
+           removedVehicle = vehiclesStored.get(vehicleIndex);
            vehiclesStored.remove(vehicleIndex);
        }
-       return removedCar;
+       return removedVehicle;
     }
 
     private boolean isAccepted(T vehicle) {
