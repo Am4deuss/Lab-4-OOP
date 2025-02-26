@@ -3,15 +3,12 @@ import org.junit.Test;
 import java.awt.*;
 import java.util.ArrayList;
 
-/*
-* This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
- */
 
 public class CarModel {
 
     public VehicleData data = new VehicleData();
+
+    TimerListener listener;
 
     private final ArrayList<Subscriber> subscriberList = new ArrayList<>();
 
@@ -29,64 +26,65 @@ public class CarModel {
                 subscriber.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
             }
         }
+        listener = new TimerListener();
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.gas(gas);
+        for (Vehicle vehicle : data.vehicles) {
+            ((Car) vehicle).gas(gas);
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars){
-            car.brake(brake);
+        for (Vehicle vehicle : data.vehicles){
+            ((Car) vehicle).brake(brake);
         }
     }
 
     void turboOn() {
-        for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOn();
+        for (Vehicle vehicle : data.vehicles){
+            if (vehicle instanceof Saab95){
+                ((Saab95) vehicle).setTurboOn();
             }
         }
     }
 
     void turboOff() {
-        for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
+        for (Vehicle vehicle : data.vehicles){
+            if (vehicle instanceof Saab95){
+                ((Saab95) vehicle).setTurboOff();
             }
         }
     }
 
     void liftBed(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).setFlatbedAngle(70);
+        for (Vehicle vehicle : data.vehicles){
+            if (vehicle instanceof Scania){
+                ((Scania) vehicle).setFlatbedAngle(70);
             }
         }
     }
 
     void lowerBed(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).setFlatbedAngle(0);
+        for (Vehicle vehicle : data.vehicles){
+            if (vehicle instanceof Scania){
+                ((Scania) vehicle).setFlatbedAngle(0);
             }
         }
     }
 
     void stop(){
-        for (Car car : cars){
-            car.stopEngine();
+        for (Vehicle vehicle : data.vehicles){
+            ((Car) vehicle).stopEngine();
         }
     }
 
     void start(){
-        for (Car car : cars){
-            car.startEngine();
+        for (Vehicle vehicle : data.vehicles){
+            ((Car) vehicle).startEngine();
         }
     }
 

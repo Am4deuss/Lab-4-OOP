@@ -38,7 +38,7 @@ public class Garage<T extends Vehicle> {
             if (isAccepted(vehicle)) {
                 vehiclesStored.add(vehicle);
             } else {
-                System.out.println(vehicle.getvehicleModel());
+                System.out.println(vehicle.getClass());
                 throw new IllegalArgumentException("Wrong vehicle type :P");
             }
         }
