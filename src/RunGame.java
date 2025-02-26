@@ -17,12 +17,9 @@ public class RunGame {
         this.controller.carM.data.vehicles.add(saab95);
         this.controller.carM.data.vehicles.add(scania);
 
-        this.controller.carM.addObserver(new DrawPanel());
         this.controller.carM.setup();
 
         this.controller.startTimer();
-            cc.frame.drawPanel.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
-        }
 
         // Creating one workshop
         Garage<Volvo240>  volvoGarage = new Garage<>(5, 0, 300, Volvo240.class);

@@ -59,6 +59,8 @@ public class Controller extends JFrame{
     // Sets everything in place and fits everything
     private void initComponents(String framename) {
 
+        this.carM.addObserver(drawPanel);
+
         this.setTitle(framename);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));

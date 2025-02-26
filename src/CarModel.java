@@ -25,7 +25,9 @@ public class CarModel {
             vehicle.updatePos(0, data.currentY);
             data.currentY += 100;
             // sending to subscribers (hi youtube)
-            Subscriber subscriber.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
+            for(Subscriber subscriber : subscriberList){
+                subscriber.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
+            }
         }
     }
 
