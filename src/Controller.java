@@ -49,6 +49,9 @@ public class Controller extends JFrame{
         final int delay = 50;
         this.timer = new Timer(delay, new TimerListener());
 
+    }
+
+    public void startTimer(){
         // Starts the timer which makes the game playable (updatable frames)
         this.timer.start();
     }

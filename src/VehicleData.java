@@ -10,6 +10,8 @@ public class VehicleData {
 
     Point VolvoWorkshopPoint;
 
+    int currentY = 0;
+
     void addVehicle(Vehicle vehicle){
         vehicles.add(vehicle);
     }

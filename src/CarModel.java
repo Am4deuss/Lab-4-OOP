@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -8,46 +10,29 @@ import java.util.ArrayList;
  */
 
 public class CarModel {
-    // member fields:
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
+    public VehicleData data = new VehicleData();
 
-    // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    private final ArrayList<Subscriber> subscriberList = new ArrayList<>();
 
-    /*public static void main(String[] args) {
-        // Instance of this class
-        CarModel cc = new CarModel();
+    public void addObserver(Subscriber subscriber){
+        subscriberList.add(subscriber);
+    }
 
-        ArrayList<Car> allVehicles = new ArrayList<>();
-        Volvo240 volvo = new Volvo240();
-        Saab95 saab95 = new Saab95();
-        Scania scania = new Scania();
-        allVehicles.add(volvo);
-        allVehicles.add(saab95);
-        allVehicles.add(scania);
-        int currentY = 0;
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        for(Car vehicle : allVehicles){
-            vehicle.updatePos(0, currentY);
-            cc.cars.add(vehicle);
-            cc.frame.drawPanel.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
-            currentY += 100;
+    // setup-method
+    void setup(){
+        for(Vehicle vehicle : data.vehicles){
+            vehicle.updatePos(0, data.currentY);
+            data.currentY += 100;
+            // sending to subscribers (hi youtube)
+            Subscriber subscriber.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
         }
-
-        // Start the timer
-        cc.timer.start();
-    }*/
+    }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars
-                ) {
+        for (Car car : cars) {
             car.gas(gas);
         }
     }

@@ -9,7 +9,7 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements Subscriber{
 
     BufferedImage volvoImage;
     BufferedImage saab95Image;
@@ -20,11 +20,12 @@ public class DrawPanel extends JPanel{
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(0,300);
 
-    public void addToCarAndPoint(Car vehicle, Point point) {
-        carAndPoint.put(vehicle, point);
+    @Override
+    public void addToCarAndPoint(Vehicle vehicle, Point point) {
+        carAndPoint.put((Car)vehicle, point);
     }
 
-    void moveit(Car car, int x, int y){
+    void moveit(Vehicle car, int x, int y){
         Point generalPoint = carAndPoint.get(car);
         generalPoint.x = x;
         generalPoint.y = y;
@@ -54,9 +55,9 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Car vehicle : carAndPoint.keySet()){
-            String model = vehicle.getCarModel();
-            Point general = carAndPoint.get(vehicle);
+        for(Car car : carAndPoint.keySet()){
+            String model = car.getCarModel();
+            Point general = carAndPoint.get(car);
             BufferedImage img = null;
             if(model == "Volvo240"){
                 img = volvoImage;
@@ -71,4 +72,5 @@ public class DrawPanel extends JPanel{
         }
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
     }
+
 }
